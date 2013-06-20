@@ -200,7 +200,7 @@ class SortedManyToManyField(ManyToManyField):
         if self.rel.symmetrical and (self.rel.to == "self" or self.rel.to == cls._meta.object_name):
             self.rel.related_name = "%s_rel_+" % name
 
-        super(ManyToManyField, self).contribute_to_class(cls, name)
+        #super(ManyToManyField, self).contribute_to_class(cls, name)
 
         # The intermediate m2m model is not auto created if:
         #  1) There is a manually specified intermediate, or
@@ -227,6 +227,8 @@ class SortedManyToManyField(ManyToManyField):
             else:
                 target = self.rel.to._meta.db_table
             cls._meta.duplicate_targets[self.column] = (target, "m2m")
+            
+        super(ManyToManyField, self).contribute_to_class(cls, name)
 
     def formfield(self, **kwargs):
         defaults = {}
