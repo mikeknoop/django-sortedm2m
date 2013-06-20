@@ -228,7 +228,7 @@ class SortedManyToManyField(ManyToManyField):
                 target = self.rel.to._meta.db_table
             cls._meta.duplicate_targets[self.column] = (target, "m2m")
             
-        cls.save(self.rel.to)
+        cls.save(name)
 
     def formfield(self, **kwargs):
         defaults = {}
